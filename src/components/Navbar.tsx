@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { Button, buttonVariants } from '@thatguycodes/design-system/web';
 import { personalInfo } from '@/data/portfolio';
 import { Menu, X, Sun, Moon, Send } from 'lucide-react';
@@ -63,6 +64,15 @@ export function Navbar() {
             <Send className="w-3.5 h-3.5" />
             <span>Schedule Advisory</span>
           </a>
+
+          <div className="relative w-8 h-8 rounded-full overflow-hidden ring-2 ring-[var(--color-sahara-amber-bright)] shrink-0">
+            <Image
+              src="/images/theodore-portrait.jpg"
+              alt={personalInfo.name}
+              fill
+              className="object-cover object-top"
+            />
+          </div>
         </div>
 
         {/* Mobile menu trigger */}

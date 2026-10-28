@@ -134,8 +134,8 @@ export function Hero() {
 
           {/* Right Column: Blueprint Portrait Showcase (5 Cols) */}
           <div className="lg:col-span-5 relative flex justify-center items-center">
-            {/* Outer Architectural Blueprint Container */}
-            <div className="relative w-full max-w-[440px] aspect-[4/5] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-3 shadow-xl">
+            {/* Outer Architectural Blueprint Frame */}
+            <div className="relative w-full max-w-[420px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-3 shadow-2xl">
               {/* Technical Grid Header Line */}
               <div className="flex items-center justify-between px-2.5 py-1.5 border-b border-[var(--border-subtle)] text-[10px] font-mono text-[var(--text-secondary)]">
                 <span>SPEC // ARCH-PORTRAIT-v4.1</span>
@@ -147,59 +147,29 @@ export function Hero() {
               </div>
 
               {/* Image Canvas with Technical Draft Overlay */}
-              <div className="relative w-full h-[calc(100%-30px)] rounded-xl overflow-hidden mt-2 bg-[var(--bg-surface)]">
+              <div className="relative w-full aspect-[3/4] rounded-xl overflow-hidden mt-2 bg-[var(--bg-surface)]">
                 <Image
-                  src="/images/architect-blueprint.png"
-                  alt="Principal Systems Architect & Technical Director Portrait in Blueprint Drafting Geometry"
+                  src="/images/theodore-portrait.jpg"
+                  alt="Letlhogonolo Theodore Obonye - Principal Systems Architect & Technical Advisory"
                   fill
-                  className="object-cover object-top filter contrast-[1.05]"
+                  className="object-cover object-center filter contrast-[1.03]"
                   priority
                 />
 
                 {/* Radar Crosshair Graphic */}
-                <div className="absolute top-4 right-4 w-14 h-14 pointer-events-none opacity-50">
+                <div className="absolute top-4 right-4 w-12 h-12 pointer-events-none opacity-40">
                   <div className="w-full h-full border border-dashed border-[var(--color-sahara-amber-bright)] rounded-full animate-radar flex items-center justify-center">
-                    <div className="w-2 h-2 bg-[var(--color-sahara-amber-bright)] rounded-full" />
+                    <div className="w-1.5 h-1.5 bg-[var(--color-sahara-amber-bright)] rounded-full" />
                   </div>
                 </div>
 
                 {/* Top Left Coordinates Marker */}
-                <div className="absolute top-3 left-3 bg-[var(--bg-canvas)]/90 backdrop-blur-md px-2 py-1 rounded text-[10px] font-mono text-[var(--text-primary)] border border-[var(--border-subtle)]">
+                <div className="absolute top-3 left-3 bg-[var(--bg-canvas)]/85 backdrop-blur-md px-2 py-1 rounded text-[10px] font-mono text-[var(--text-primary)] border border-[var(--border-subtle)] shadow-sm">
                   LATENCY // &lt;4ms EDGE
                 </div>
 
-                {/* Floating Telemetry Chip 1 (Top Left Drift) */}
-                <div className="absolute top-16 -left-1 bg-[var(--bg-surface)]/95 backdrop-blur-md border border-[var(--border-subtle)] px-3 py-2 rounded-lg shadow-lg animate-float-1 hidden sm:flex items-center gap-2">
-                  <div className="p-1 rounded bg-[var(--color-sahara-amber)]/20 text-[var(--color-sahara-amber-bright)]">
-                    <ShieldCheck className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <div className="text-[9px] font-mono text-[var(--text-muted)] uppercase tracking-wider">
-                      Resiliency Target
-                    </div>
-                    <div className="text-xs font-bold text-[var(--text-primary)]">
-                      99.999% Fault SLA
-                    </div>
-                  </div>
-                </div>
-
-                {/* Floating Telemetry Chip 2 (Bottom Right Drift) */}
-                <div className="absolute bottom-14 -right-1 bg-[var(--bg-surface)]/95 backdrop-blur-md border border-[var(--border-subtle)] px-3 py-2 rounded-lg shadow-lg animate-float-2 hidden sm:flex items-center gap-2">
-                  <div className="p-1 rounded bg-[var(--color-sahara-terracotta)]/20 text-[var(--color-sahara-terracotta)]">
-                    <Users className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <div className="text-[9px] font-mono text-[var(--text-muted)] uppercase tracking-wider">
-                      Scale Directed
-                    </div>
-                    <div className="text-xs font-bold text-[var(--text-primary)]">
-                      140+ Eng Across 4 Hubs
-                    </div>
-                  </div>
-                </div>
-
                 {/* Bottom Blueprint Spec Label */}
-                <div className="absolute bottom-2 left-2 right-2 bg-[var(--bg-canvas)]/90 backdrop-blur-md px-3 py-1.5 rounded-lg flex items-center justify-between text-[10px] font-mono text-[var(--text-primary)] border border-[var(--border-subtle)]">
+                <div className="absolute bottom-3 left-3 right-3 bg-[var(--bg-canvas)]/90 backdrop-blur-md px-3 py-1.5 rounded-lg flex items-center justify-between text-[10px] font-mono text-[var(--text-primary)] border border-[var(--border-subtle)] shadow-sm">
                   <span className="flex items-center gap-1.5">
                     <span className="text-[var(--color-sahara-amber-bright)]">◈</span>
                     <span>SYSTEM_TOPOLOGY: ACTIVE-ACTIVE MESH</span>
@@ -207,6 +177,36 @@ export function Hero() {
                   <span className="text-[var(--color-sahara-amber-bright)] font-bold">
                     VERIFIED
                   </span>
+                </div>
+              </div>
+
+              {/* Floating Telemetry Chip 1 (Top Left Drift) */}
+              <div className="absolute -top-3 -left-3 bg-[var(--bg-surface)]/95 backdrop-blur-md border border-[var(--border-subtle)] px-3 py-2 rounded-lg shadow-xl animate-float-1 hidden sm:flex items-center gap-2 z-20">
+                <div className="p-1.5 rounded bg-[var(--color-sahara-amber)]/20 text-[var(--color-sahara-amber-bright)]">
+                  <ShieldCheck className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="text-[9px] font-mono text-[var(--text-muted)] uppercase tracking-wider">
+                    Resiliency Target
+                  </div>
+                  <div className="text-xs font-bold text-[var(--text-primary)]">
+                    99.999% Fault SLA
+                  </div>
+                </div>
+              </div>
+
+              {/* Floating Telemetry Chip 2 (Bottom Right Drift) */}
+              <div className="absolute -bottom-3 -right-3 bg-[var(--bg-surface)]/95 backdrop-blur-md border border-[var(--border-subtle)] px-3 py-2 rounded-lg shadow-xl animate-float-2 hidden sm:flex items-center gap-2 z-20">
+                <div className="p-1.5 rounded bg-[var(--color-sahara-terracotta)]/20 text-[var(--color-sahara-terracotta)]">
+                  <Users className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="text-[9px] font-mono text-[var(--text-muted)] uppercase tracking-wider">
+                    Scale Directed
+                  </div>
+                  <div className="text-xs font-bold text-[var(--text-primary)]">
+                    140+ Eng Across 4 Hubs
+                  </div>
                 </div>
               </div>
             </div>
