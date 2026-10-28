@@ -1,0 +1,62 @@
+@import "@thatguycodes/design-system/styles.css";
+
+/* Extra portfolio-specific effects */
+.sahara-glow {
+  box-shadow: 0 0 25px -4px rgba(224, 159, 62, 0.25);
+}
+
+.sahara-glow-terracotta {
+  box-shadow: 0 0 25px -4px rgba(200, 109, 59, 0.25);
+}
+
+.bg-sahara-grid {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 186, 86, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 186, 86, 0.04) 1px, transparent 1px);
+}
+
+/* Architectural blueprint grid & animation styling from Stitch */
+.blueprint-grid {
+  background-image: 
+    radial-gradient(rgba(219, 193, 182, 0.25) 1px, transparent 1px),
+    linear-gradient(to right, rgba(219, 193, 182, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(219, 193, 182, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px, 96px 96px, 96px 96px;
+}
+
+.dark .blueprint-grid {
+  background-image: 
+    radial-gradient(rgba(224, 159, 62, 0.15) 1px, transparent 1px),
+    linear-gradient(to right, rgba(224, 159, 62, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(224, 159, 62, 0.04) 1px, transparent 1px);
+  background-size: 24px 24px, 96px 96px, 96px 96px;
+}
+
+@keyframes float-subtle-1 {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(0.5deg); }
+}
+
+@keyframes float-subtle-2 {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(6px) rotate(-0.5deg); }
+}
+
+@keyframes radar-scan {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-float-1 {
+  animation: float-subtle-1 6.5s ease-in-out infinite;
+}
+
+.animate-float-2 {
+  animation: float-subtle-2 7.2s ease-in-out infinite;
+}
+
+.animate-radar {
+  animation: radar-scan 9s linear infinite;
+}
+

@@ -9,6 +9,12 @@
 
 # dependencies
 /node_modules
+/.astro
+/.nx
+/dist
+/.next
+/out
+/legacy
 
 # profiling files
 chrome-profiler-events*.json
