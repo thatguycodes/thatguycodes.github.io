@@ -1,27 +1,26 @@
 'use client';
 
-import { Hero } from '@/components/Hero';
-import { Metrics } from '@/components/Metrics';
-import { ArchitectureDomains } from '@/components/ArchitectureDomains';
-import { ConsultingServices } from '@/components/ConsultingServices';
-import { LeadershipPrinciples } from '@/components/LeadershipPrinciples';
-import { Projects } from '@/components/Projects';
-import { Experience } from '@/components/Experience';
-import { Skills } from '@/components/Skills';
-import { Contact } from '@/components/Contact';
+import React from 'react';
+import { Header } from '@/components/david/Header';
+import { Hero } from '@/components/david/Hero';
+import { About } from '@/components/david/About';
+import { Projects } from '@/components/david/Projects';
+import { Experience } from '@/components/david/Experience';
+import { Contact } from '@/components/david/Contact';
+import { Footer } from '@/components/david/Footer';
 
 export default function Home() {
   return (
     <>
-      <Hero />
-      <Metrics />
-      <ArchitectureDomains />
-      <ConsultingServices />
-      <LeadershipPrinciples />
-      <Projects />
-      <Experience />
-      <Skills />
-      <Contact />
+      <Header />
+      <main className="w-full">
+        <Hero />
+        <About />
+        <Projects />
+        <Experience />
+        <Contact />
+      </main>
+      <Footer />
     </>
   );
 }

@@ -1,62 +1,78 @@
-@import "@thatguycodes/design-system/styles.css";
+@import "tailwindcss";
 
-/* Extra portfolio-specific effects */
-.sahara-glow {
-  box-shadow: 0 0 25px -4px rgba(224, 159, 62, 0.25);
+:root {
+  /* David Heckhoff Signature Color Palette */
+  --color-beige-400: #f5efe6;
+  --color-beige-500: #ede5d8;
+  --color-beige-600: #e2d7c7;
+  --color-beige-700: #dfd1bc;
+
+  --color-black-400: #2d2a24;
+  --color-black-500: #1b1916;
+
+  --color-text-400: #2d2a24;
+  --color-text-300: #6b6355;
+  --color-text-muted: #9c9384;
+
+  --color-border-subtle: rgba(45, 42, 36, 0.12);
+  --color-border-base: rgba(45, 42, 36, 0.2);
+
+  --color-accent-blue: #176cfe;
+  --color-accent-cyan: #00b4d8;
+  --color-accent-amber: #ff8400;
+
+  --font-urbanist: 'Urbanist', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 }
 
-.sahara-glow-terracotta {
-  box-shadow: 0 0 25px -4px rgba(200, 109, 59, 0.25);
+.dark {
+  --color-beige-400: #121316;
+  --color-beige-500: #1a1b20;
+  --color-beige-600: #22242a;
+  --color-beige-700: #2a2d35;
+
+  --color-black-400: #f5efe6;
+  --color-black-500: #ffffff;
+
+  --color-text-400: #f5efe6;
+  --color-text-300: #a5acba;
+  --color-text-muted: #6e7687;
+
+  --color-border-subtle: rgba(255, 255, 255, 0.08);
+  --color-border-base: rgba(255, 255, 255, 0.16);
+
+  --color-accent-blue: #3b82f6;
+  --color-accent-cyan: #38bdf8;
+  --color-accent-amber: #fb923c;
 }
 
-.bg-sahara-grid {
+body {
+  background-color: var(--color-beige-400);
+  color: var(--color-text-400);
+  font-family: var(--font-urbanist);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.25s ease, color 0.25s ease;
+  overflow-x: hidden;
+}
+
+/* Subtle Technical Grid Overlay inspired by david-hckh.com */
+.bg-david-grid {
   background-size: 32px 32px;
   background-image: 
-    linear-gradient(to right, rgba(255, 186, 86, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 186, 86, 0.04) 1px, transparent 1px);
+    linear-gradient(to right, rgba(45, 42, 36, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(45, 42, 36, 0.035) 1px, transparent 1px);
 }
 
-/* Architectural blueprint grid & animation styling from Stitch */
-.blueprint-grid {
+.dark .bg-david-grid {
   background-image: 
-    radial-gradient(rgba(219, 193, 182, 0.25) 1px, transparent 1px),
-    linear-gradient(to right, rgba(219, 193, 182, 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(219, 193, 182, 0.08) 1px, transparent 1px);
-  background-size: 24px 24px, 96px 96px, 96px 96px;
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
 }
 
-.dark .blueprint-grid {
-  background-image: 
-    radial-gradient(rgba(224, 159, 62, 0.15) 1px, transparent 1px),
-    linear-gradient(to right, rgba(224, 159, 62, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(224, 159, 62, 0.04) 1px, transparent 1px);
-  background-size: 24px 24px, 96px 96px, 96px 96px;
+/* Custom smooth text selection */
+::selection {
+  background-color: var(--color-accent-blue);
+  color: #ffffff;
 }
-
-@keyframes float-subtle-1 {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-6px) rotate(0.5deg); }
-}
-
-@keyframes float-subtle-2 {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(6px) rotate(-0.5deg); }
-}
-
-@keyframes radar-scan {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.animate-float-1 {
-  animation: float-subtle-1 6.5s ease-in-out infinite;
-}
-
-.animate-float-2 {
-  animation: float-subtle-2 7.2s ease-in-out infinite;
-}
-
-.animate-radar {
-  animation: radar-scan 9s linear infinite;
-}
-
