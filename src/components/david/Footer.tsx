@@ -49,10 +49,10 @@ export function Footer() {
             Projects
           </a>
           <a
-            href="#experience"
+            href="#articles"
             className="hover:text-[var(--color-black-400)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-blue)] rounded-sm"
           >
-            Experience
+            Articles
           </a>
           <a
             href="#contact"

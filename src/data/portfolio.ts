@@ -1,3 +1,16 @@
+export interface ArticleItem {
+  title: string;
+  slug: string;
+  category: string;
+  excerpt: string;
+  publishedAt: string;
+  readTime: string;
+  tags: string[];
+  accentColor: string;
+  liveUrl?: string;
+  isPlaceholder?: boolean;
+}
+
 export interface ProjectItem {
   title: string;
   slug: string;
@@ -171,6 +184,57 @@ export const projectPlaceholders: ProjectItem[] = [
       "Deterministic workflow execution engine with containerized worker pools, priority scheduling, and real-time WebSocket progress telemetry.",
     tags: ["Java", "Spring Boot", "WebSockets", "Kubernetes"],
     accentColor: "#7928ca",
+    isPlaceholder: true,
+  },
+];
+
+export const articlePlaceholders: ArticleItem[] = [
+  {
+    title: "Designing Resilient Event-Driven Microservices on AWS",
+    slug: "resilient-event-driven-microservices-aws",
+    category: "Distributed Systems",
+    excerpt:
+      "Architectural patterns for achieving sub-10ms p99 latency using decoupled SQS/Kafka event queues, idempotent consumers, and distributed Redis caching layers.",
+    publishedAt: "Nov 2026",
+    readTime: "7 min read",
+    tags: ["AWS", "Kafka", "Distributed Systems", "Redis", "TypeScript"],
+    accentColor: "#176cfe",
+    isPlaceholder: true,
+  },
+  {
+    title: "Baking Dynamic Headless Content into Static Edge Deployments",
+    slug: "dynamic-headless-content-static-edge-deployments",
+    category: "Cloud Architecture",
+    excerpt:
+      "Building a zero-maintenance, zero-cost personal platform by pairing Directus Headless CMS and Supabase PostgreSQL with automated GitHub Pages static builds.",
+    publishedAt: "Oct 2026",
+    readTime: "5 min read",
+    tags: ["Next.js", "Directus", "Supabase", "Cloudflare", "CI/CD"],
+    accentColor: "#ff8400",
+    isPlaceholder: true,
+  },
+  {
+    title: "WebGL Performance: 60 FPS Particle Systems in Three.js and React",
+    slug: "webgl-performance-threejs-react-particles",
+    category: "Creative Tech",
+    excerpt:
+      "Practical techniques for offloading compute to custom GLSL shaders, instanced meshes, and respecting prefers-reduced-motion for accessible 3D interfaces.",
+    publishedAt: "Sep 2026",
+    readTime: "8 min read",
+    tags: ["Three.js", "WebGL", "GLSL", "React 19", "Accessibility"],
+    accentColor: "#00b4d8",
+    isPlaceholder: true,
+  },
+  {
+    title: "Building Sahara UI: An Accessible Dual-Theme Design System",
+    slug: "building-sahara-ui-dual-theme-design-system",
+    category: "Design Engineering",
+    excerpt:
+      "How Sahara Nocturne and Solstice token architectures enforce WCAG AA contrast ratios, inverted rounded corner geometry, and fluid typography across themes.",
+    publishedAt: "Aug 2026",
+    readTime: "6 min read",
+    tags: ["Design Systems", "Sahara UI", "Tailwind CSS", "WCAG", "CSS Architecture"],
+    accentColor: "#22904b",
     isPlaceholder: true,
   },
 ];

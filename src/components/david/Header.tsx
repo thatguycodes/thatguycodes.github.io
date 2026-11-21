@@ -109,10 +109,10 @@ export function Header() {
             Projects
           </a>
           <a
-            href="#experience"
+            href="#articles"
             className="hover:text-[var(--color-black-400)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-blue)] rounded-sm"
           >
-            Experience
+            Articles
           </a>
           <a
             href="#contact"
@@ -194,11 +194,11 @@ export function Header() {
             Projects
           </a>
           <a
-            href="#experience"
+            href="#articles"
             onClick={() => setMobileMenuOpen(false)}
             className="py-1 text-[var(--color-text-300)] hover:text-[var(--color-black-400)]"
           >
-            Experience
+            Articles
           </a>
           <a
             href="#contact"
