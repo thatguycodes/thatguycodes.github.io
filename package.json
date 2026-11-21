@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@thatguycodes/design-system": "^1.0.2",
     "@types/three": "^0.187.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -17,6 +16,7 @@
     "next": "^15.2.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "sahara-ui": "npm:@thatguycodes/design-system@^1.0.2",
     "tailwind-merge": "^3.0.0",
     "three": "^0.187.0"
   },

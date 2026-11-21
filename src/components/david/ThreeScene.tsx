@@ -1,14 +1,29 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
+import { WireframeCanvas } from './WireframeCanvas';
 
 export function ThreeScene() {
   const mountRef = useRef<HTMLDivElement | null>(null);
+  const [webGLFailed, setWebGLFailed] = useState(false);
 
   useEffect(() => {
     const container = mountRef.current;
     if (!container) return;
+
+    // Check WebGL availability
+    try {
+      const testCanvas = document.createElement('canvas');
+      const gl = testCanvas.getContext('webgl') || testCanvas.getContext('experimental-webgl');
+      if (!gl) {
+        setWebGLFailed(true);
+        return;
+      }
+    } catch {
+      setWebGLFailed(true);
+      return;
+    }
 
     const width = container.clientWidth || 500;
     const height = container.clientHeight || 500;
@@ -21,26 +36,33 @@ export function ThreeScene() {
     camera.position.set(0, 0, 4.8);
 
     // Renderer
-    const renderer = new THREE.WebGLRenderer({
-      antialias: true,
-      alpha: true,
-      powerPreference: 'high-performance',
-    });
-    renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.2;
-    container.appendChild(renderer.domElement);
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({
+        antialias: true,
+        alpha: true,
+        powerPreference: 'high-performance',
+      });
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.2;
+      container.appendChild(renderer.domElement);
+    } catch (e) {
+      console.warn('WebGL initialization failed, falling back to 2D Canvas:', e);
+      setWebGLFailed(true);
+      return;
+    }
 
     // Lights
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
     scene.add(ambientLight);
 
-    const dirLight1 = new THREE.DirectionalLight(0x176cfe, 2.5); // Signature electric blue
+    const dirLight1 = new THREE.DirectionalLight(0xe09f3e, 2.5); // Sahara Amber glow
     dirLight1.position.set(5, 5, 4);
     scene.add(dirLight1);
 
-    const dirLight2 = new THREE.DirectionalLight(0xffa200, 1.8); // Warm amber highlight
+    const dirLight2 = new THREE.DirectionalLight(0xc86d3b, 1.8); // Sahara Terracotta highlight
     dirLight2.position.set(-5, -4, 3);
     scene.add(dirLight2);
 
@@ -51,7 +73,7 @@ export function ThreeScene() {
     // 1. Core Faceted Crystal (Icosahedron with flat shading)
     const geom = new THREE.IcosahedronGeometry(1.25, 0);
     const mat = new THREE.MeshPhysicalMaterial({
-      color: 0xdfd1bc, // Warm signature beige
+      color: 0xdfd1bc,
       roughness: 0.25,
       metalness: 0.1,
       transmission: 0.45,
@@ -67,10 +89,10 @@ export function ThreeScene() {
     // 2. Wireframe Cage
     const wireGeom = new THREE.IcosahedronGeometry(1.26, 0);
     const wireMat = new THREE.MeshBasicMaterial({
-      color: 0x2d2a24,
+      color: 0x393431,
       wireframe: true,
       transparent: true,
-      opacity: 0.25,
+      opacity: 0.3,
     });
     const wireframe = new THREE.Mesh(wireGeom, wireMat);
     mainGroup.add(wireframe);
@@ -78,9 +100,9 @@ export function ThreeScene() {
     // 3. Inner Glowing Core (Octahedron)
     const innerGeom = new THREE.OctahedronGeometry(0.65, 0);
     const innerMat = new THREE.MeshStandardMaterial({
-      color: 0x176cfe,
-      emissive: 0x0055ff,
-      emissiveIntensity: 0.7,
+      color: 0xffba56,
+      emissive: 0xe09f3e,
+      emissiveIntensity: 0.8,
       roughness: 0.3,
       metalness: 0.8,
       flatShading: true,
@@ -91,9 +113,9 @@ export function ThreeScene() {
     // 4. Orbital Ring
     const ringGeom = new THREE.TorusGeometry(1.9, 0.015, 16, 100);
     const ringMat = new THREE.MeshBasicMaterial({
-      color: 0x176cfe,
+      color: 0xffba56,
       transparent: true,
-      opacity: 0.35,
+      opacity: 0.4,
     });
     const ring = new THREE.Mesh(ringGeom, ringMat);
     ring.rotation.x = Math.PI / 3;
@@ -114,12 +136,15 @@ export function ThreeScene() {
     particlesGeom.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
     const particlesMat = new THREE.PointsMaterial({
       size: 0.035,
-      color: 0x176cfe,
+      color: 0xffba56,
       transparent: true,
       opacity: 0.65,
     });
     const particleCloud = new THREE.Points(particlesGeom, particlesMat);
     mainGroup.add(particleCloud);
+
+    // Respect reduced motion preference
+    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // Mouse tracking & smooth damping
     let mouseX = 0;
@@ -128,6 +153,7 @@ export function ThreeScene() {
     let targetY = 0;
 
     const handleMouseMove = (event: MouseEvent) => {
+      if (prefersReducedMotion) return;
       mouseX = (event.clientX / window.innerWidth) * 2 - 1;
       mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
     };
@@ -148,37 +174,28 @@ export function ThreeScene() {
 
     // Animation Loop
     let animId: number;
-    let clock = new THREE.Clock();
+    const clock = new THREE.Clock();
 
     const animate = () => {
       animId = requestAnimationFrame(animate);
       const elapsedTime = clock.getElapsedTime();
 
-      // Smooth mouse lerp
-      targetX += (mouseX - targetX) * 0.05;
-      targetY += (mouseY - targetY) * 0.05;
+      if (!prefersReducedMotion) {
+        targetX = mouseX * 0.45;
+        targetY = mouseY * 0.45;
 
-      // Group tilt based on cursor
-      mainGroup.rotation.y = targetX * 0.8 + elapsedTime * 0.15;
-      mainGroup.rotation.x = -targetY * 0.6 + Math.sin(elapsedTime * 0.4) * 0.1;
+        mainGroup.rotation.y += 0.005;
+        mainGroup.rotation.x = THREE.MathUtils.lerp(mainGroup.rotation.x, targetY, 0.05);
+        mainGroup.rotation.y = THREE.MathUtils.lerp(mainGroup.rotation.y, targetX + elapsedTime * 0.15, 0.05);
 
-      // Independent rotations
-      crystal.rotation.y = elapsedTime * 0.12;
-      crystal.rotation.x = Math.sin(elapsedTime * 0.3) * 0.15;
+        const pulse = 1 + Math.sin(elapsedTime * 2.2) * 0.04;
+        innerCore.scale.set(pulse, pulse, pulse);
+        innerCore.rotation.y -= 0.012;
+        innerCore.rotation.z += 0.008;
 
-      wireframe.rotation.copy(crystal.rotation);
-
-      innerCore.rotation.y = -elapsedTime * 0.3;
-      innerCore.rotation.z = Math.cos(elapsedTime * 0.25) * 0.2;
-
-      ring.rotation.z = elapsedTime * 0.1;
-      ring.rotation.y = Math.sin(elapsedTime * 0.2) * 0.3;
-
-      particleCloud.rotation.y = -elapsedTime * 0.05;
-
-      // Subtle breath scale
-      const breath = 1 + Math.sin(elapsedTime * 1.2) * 0.025;
-      crystal.scale.set(breath, breath, breath);
+        ring.rotation.z += 0.003;
+        particleCloud.rotation.y -= 0.002;
+      }
 
       renderer.render(scene, camera);
     };
@@ -206,11 +223,15 @@ export function ThreeScene() {
     };
   }, []);
 
+  if (webGLFailed) {
+    return <WireframeCanvas />;
+  }
+
   return (
     <div
       ref={mountRef}
-      className="w-full h-full flex items-center justify-center cursor-grab active:cursor-grabbing"
-      title="Interactive 3D WebGL (Three.js) — Move your cursor to rotate"
+      aria-hidden="true"
+      className="w-full h-full flex items-center justify-center cursor-grab active:cursor-grabbing pointer-events-none select-none"
     />
   );
 }

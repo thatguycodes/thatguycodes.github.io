@@ -45,7 +45,6 @@ export const personalInfo = {
   education: "BSc (Hons) Computer Science",
   email: "ltobonye@gmail.com",
   socials: [
-    { name: "Mail", url: "mailto:ltobonye@gmail.com", icon: "mail" },
     { name: "GitHub", url: "https://github.com/thatguycodes", icon: "github" },
     { name: "LinkedIn", url: "https://www.linkedin.com/in/letlhogonolo-theodore-obonye-23727b171/", icon: "linkedin" },
     { name: "Twitter / X", url: "https://twitter.com/thatguycodes", icon: "twitter" },

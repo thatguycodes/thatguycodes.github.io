@@ -1,49 +1,61 @@
-@import "tailwindcss";
+@import "sahara-ui/styles.css";
 
-:root {
-  /* David Heckhoff Signature Color Palette */
-  --color-beige-400: #f5efe6;
-  --color-beige-500: #ede5d8;
-  --color-beige-600: #e2d7c7;
-  --color-beige-700: #dfd1bc;
+/* ========================================================================= */
+/* Complete Theme Variables: Sahara Solstice (Light) & Nocturne (Dark)       */
+/* ========================================================================= */
 
-  --color-black-400: #2d2a24;
-  --color-black-500: #1b1916;
+:root,
+.light,
+[data-theme="light"] {
+  /* Surfaces & Backgrounds */
+  --color-beige-400: #fff8f5;
+  --color-beige-500: #faf2ee;
+  --color-beige-600: #f3e7e0;
+  --color-beige-700: #efe3db;
 
-  --color-text-400: #2d2a24;
-  --color-text-300: #6b6355;
-  --color-text-muted: #9c9384;
+  /* Typography (High-contrast WCAG AAA compliant on light background) */
+  --color-black-400: #221b17;
+  --color-black-500: #110d0c;
+  --color-text-400: #221b17;
+  --color-text-300: #514536;
+  --color-text-muted: #705f55;
 
-  --color-border-subtle: rgba(45, 42, 36, 0.12);
-  --color-border-base: rgba(45, 42, 36, 0.2);
+  /* Borders & Dividers */
+  --color-border-subtle: rgba(34, 27, 23, 0.12);
+  --color-border-base: rgba(34, 27, 23, 0.22);
 
-  --color-accent-blue: #176cfe;
-  --color-accent-cyan: #00b4d8;
-  --color-accent-amber: #ff8400;
+  /* Accents & Signals */
+  --color-accent-blue: #c86d3b;
+  --color-accent-amber: #e09f3e;
+  --color-accent-cyan: #0284c7;
 
   --font-urbanist: 'Urbanist', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
 
-.dark {
-  --color-beige-400: #121316;
-  --color-beige-500: #1a1b20;
-  --color-beige-600: #22242a;
-  --color-beige-700: #2a2d35;
+.dark,
+[data-theme="dark"] {
+  /* Surfaces & Backgrounds (Sahara Nocturne Obsidian Basalt) */
+  --color-beige-400: #161311;
+  --color-beige-500: #231f1d;
+  --color-beige-600: #2e2927;
+  --color-beige-700: #393431;
 
+  /* Typography (High-contrast WCAG AAA compliant on dark background) */
   --color-black-400: #f5efe6;
   --color-black-500: #ffffff;
-
   --color-text-400: #f5efe6;
-  --color-text-300: #a5acba;
-  --color-text-muted: #6e7687;
+  --color-text-300: #d5c4b1;
+  --color-text-muted: #a8a29e;
 
-  --color-border-subtle: rgba(255, 255, 255, 0.08);
-  --color-border-base: rgba(255, 255, 255, 0.16);
+  /* Borders & Dividers */
+  --color-border-subtle: rgba(255, 255, 255, 0.12);
+  --color-border-base: rgba(255, 255, 255, 0.2);
 
-  --color-accent-blue: #3b82f6;
+  /* Accents & Signals (Glowing Sahara Amber & Cyan) */
+  --color-accent-blue: #ffba56;
+  --color-accent-amber: #ffba56;
   --color-accent-cyan: #38bdf8;
-  --color-accent-amber: #fb923c;
 }
 
 body {
@@ -57,15 +69,22 @@ body {
   overflow-x: hidden;
 }
 
-/* Subtle Technical Grid Overlay inspired by david-hckh.com */
+/* Accessible focus outlines for keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--color-accent-blue);
+  outline-offset: 2px;
+}
+
+/* Subtle Technical Grid Overlay */
 .bg-david-grid {
   background-size: 32px 32px;
   background-image: 
-    linear-gradient(to right, rgba(45, 42, 36, 0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(45, 42, 36, 0.035) 1px, transparent 1px);
+    linear-gradient(to right, rgba(45, 42, 36, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(45, 42, 36, 0.04) 1px, transparent 1px);
 }
 
-.dark .bg-david-grid {
+.dark .bg-david-grid,
+[data-theme="dark"] .bg-david-grid {
   background-image: 
     linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
@@ -74,5 +93,23 @@ body {
 /* Custom smooth text selection */
 ::selection {
   background-color: var(--color-accent-blue);
-  color: #ffffff;
+  color: #161311;
+}
+
+.dark ::selection,
+[data-theme="dark"] ::selection {
+  background-color: var(--color-accent-blue);
+  color: #161311;
+}
+
+/* Respect user preferences for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

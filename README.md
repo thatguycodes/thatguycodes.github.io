@@ -1,32 +1,45 @@
 # thatguycodes.github.io
 
-Modern developer portfolio and engineering showcase for **Letlhogonolo Theodore Obonye** (Software Engineer & Cloud Architect Aspirant).
+Modern developer portfolio and engineering showcase for **Letlhogonolo Theodore Obonye** (Software Engineer & Cloud Architect).
 
-Built with **[Next.js 15](https://nextjs.org/)** (App Router), styled with **[Sahara UI (@thatguycodes/design-system)](https://www.npmjs.com/package/@thatguycodes/design-system)** and **Tailwind CSS**, and deployed automatically to **GitHub Pages** via GitHub Actions.
+Built with **[Next.js 15](https://nextjs.org/)** (App Router, Static Export), styled with **[Sahara UI (`sahara-ui`)](https://github.com/thatguycodes/sahara-ui)** and **Tailwind CSS**, featuring an interactive **Three.js** 3D WebGL centerpiece. Deployed automatically to **GitHub Pages** via GitHub Actions.
 
 ---
 
 ## ⚡ Highlights
 
-- **Sahara UI Design System**: Custom Desert Modernism design language with Sahara Nocturne (dark basalt, glowing amber, terracotta accents) and Solstice (warm sand) palettes.
-- **Component Suite**: Leverages `@thatguycodes/design-system` primitives including `Button`, `Badge`, `Card`, `Tabs`, `Input`, `Textarea`, and theme variables.
-- **Static Export Performance**: Built with `output: 'export'` for zero-server hosting directly on GitHub Pages.
+- **Sahara UI Design System (`sahara-ui`)**:
+  - **Theming**: Full dual-theme architecture supporting **Sahara Nocturne** (dark basalt `#161311`, warm glowing amber `#ffba56`, terracotta accents) and **Sahara Solstice** (warm desert sand `#fff8f5`, terracotta `#c86d3b`).
+  - **Component Primitives**: Uses official `sahara-ui/web` primitives including `Button`, `Badge`, `Card`, `Input`, `Textarea`, `Label`, and semantic theme tokens.
+- **Privacy & Accessibility First (WCAG AA)**:
+  - **Email Privacy Protected**: Email address is kept private and unexposed to scrapers; inquiries are submitted through an accessible, interactive contact form with real-time feedback.
+  - **High-Contrast Typography**: Complies with WCAG AA/AAA contrast ratios in both light and dark modes.
+  - **Keyboard & Screen Reader Accessible**: Visible focus rings (`focus-visible:ring-2`), semantic ARIA labels, landmark regions, and status announcement live regions.
+  - **Motion Sensitivity**: Honors `prefers-reduced-motion` across CSS transitions, animations, and the Three.js 3D WebGL loop.
+- **Interactive Three.js 3D Centerpiece**:
+  - Real-time WebGL faceted crystal (Icosahedron with transmission physics), glowing emissive octahedron core, orbital torus ring, and floating dust particle cloud.
+  - Interactive mouse parallax tracking with smooth lerp damping and automatic fallback to `WireframeCanvas` on non-WebGL environments.
+- **Architectural Aesthetic**:
+  - Signature rotated sticker badges with subtle hover reset.
+  - Custom SVG corner notches (`Notch.tsx`) creating smooth inverted rounded transitions between sections.
+  - Subtle technical telemetry grid overlays.
+- **Static Export Performance**:
+  - Built with `output: 'export'` for zero-server hosting directly on GitHub Pages.
 - **Comprehensive Showcase**:
-  - Hero with status badge, headline, and Sahara glow effects.
-  - About section highlighting BSc (Hons) Computer Science and Test-Driven Development philosophy.
-  - Interactive Skills matrix with category tabs (Backend, Frontend, Cloud & DevOps, Databases).
-  - Career Experience timeline featuring milestones at ConnectUS ICT, UASF/BOCRA, BOFINET, and BITRI.
-  - Featured projects with tags, GitHub source, and live deployment links.
-  - Interactive contact section and mail integration.
-  - Dark / Light theme toggle.
+  - **Hero**: Telemetry status badges, massive signature typography, and live 3D crystal backdrop.
+  - **About**: Identity verification HUD and 5 core engineering domains.
+  - **Projects**: Bento grid case studies with dynamic category chips and external preview badges.
+  - **Experience**: Career milestones and systems leadership timeline.
+  - **Contact**: Interactive dispatch form with instant validation and verified social links.
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Framework**: [Next.js 15](https://nextjs.org/) (App Router, Static Export)
-- **Component Library**: [`@thatguycodes/design-system`](https://www.npmjs.com/package/@thatguycodes/design-system) (Sahara UI)
+- **Framework**: [Next.js 15](https://nextjs.org/) (App Router, Static HTML Export)
+- **Component Library**: [Sahara UI (`sahara-ui`)](https://github.com/thatguycodes/sahara-ui)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **3D Graphics**: [Three.js](https://threejs.org/) (WebGL / GLSL)
 - **Icons**: [Lucide React](https://lucide.dev/)
 - **Hosting**: GitHub Pages via GitHub Actions
 
@@ -49,7 +62,7 @@ Open `http://localhost:3000` to preview in your browser.
 ```bash
 npm run build
 ```
-Generates a production static export in the `out/` directory.
+Generates a production static export in the `out/` directory ready for deployment.
 
 ---
 
@@ -58,13 +71,13 @@ Generates a production static export in the `out/` directory.
 1. Commit and push changes:
    ```bash
    git add .
-   git commit -m "feat: migrate to Next.js with Sahara UI and GitHub Pages static export"
+   git commit -m "feat: adopt sahara-ui component library naming and styling"
    git push origin master
    ```
 2. In your GitHub repository settings:
    - Navigate to **Settings** > **Pages**.
    - Under **Build and deployment** > **Source**, choose **GitHub Actions**.
-3. Every commit to `master` automatically triggers the workflow in `.github/workflows/deploy.yml` to build and publish your site to `https://thatguycodes.github.io`.
+3. Every commit to `master` automatically triggers `.github/workflows/deploy.yml` to build and publish your site to `https://thatguycodes.github.io`.
 
 ---
 

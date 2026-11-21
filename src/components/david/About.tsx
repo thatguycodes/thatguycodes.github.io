@@ -3,13 +3,18 @@
 import React from 'react';
 import { personalInfo, servicesList } from '@/data/portfolio';
 import { Notch } from './Notch';
-import { GraduationCap, MapPin, CheckCircle2, ShieldCheck, Terminal, Layers } from 'lucide-react';
+import { Card, Badge } from 'sahara-ui/web';
+import { GraduationCap, MapPin, CheckCircle2, ShieldCheck, Terminal } from 'lucide-react';
 
 export function About() {
   return (
-    <section id="about" className="relative w-full py-24 bg-[var(--color-beige-500)]/60 dark:bg-[#16171b] border-y border-[var(--color-border-subtle)]">
+    <section
+      id="about"
+      aria-labelledby="about-heading"
+      className="relative w-full py-24 bg-[var(--color-beige-500)]/60 dark:bg-[#1f1b19] border-y border-[var(--color-border-subtle)]"
+    >
       {/* Top and Bottom Corner Notches */}
-      <div className="absolute top-0 left-0 right-0 flex justify-between pointer-events-none -translate-y-full text-[var(--color-beige-500)]/60 dark:text-[#16171b]">
+      <div className="absolute top-0 left-0 right-0 flex justify-between pointer-events-none -translate-y-full text-[var(--color-beige-500)]/60 dark:text-[#1f1b19]">
         <Notch />
         <Notch flipX />
       </div>
@@ -23,7 +28,10 @@ export function About() {
             </span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-[var(--color-black-400)] leading-tight">
+          <h2
+            id="about-heading"
+            className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-[var(--color-black-400)] leading-tight"
+          >
             Engineering Systems with
             <br />
             <span className="text-[var(--color-accent-blue)]">Reliability &amp; Craft</span>.
@@ -35,14 +43,16 @@ export function About() {
           />
         </div>
 
-        {/* HUD Box Grid: David Heckhoff Style */}
+        {/* HUD Box Grid with Design System Cards */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
           {/* Left Column: Details Box (5 Cols) */}
           <div className="md:col-span-5 flex flex-col gap-6">
-            <div className="p-6 sm:p-8 rounded-3xl bg-[var(--color-beige-400)] dark:bg-[#1c1d22] border border-[var(--color-border-subtle)] shadow-sm relative overflow-hidden">
+            <Card className="p-6 sm:p-8 rounded-3xl bg-[var(--color-beige-400)] dark:bg-[#231f1d] border-[var(--color-border-subtle)] shadow-sm relative overflow-hidden">
               <div className="flex items-center justify-between pb-4 border-b border-[var(--color-border-subtle)] font-mono text-xs text-[var(--color-text-300)] font-bold uppercase tracking-wider">
                 <span>IDENTITY // DETAILS</span>
-                <span className="text-[var(--color-accent-blue)]">VERIFIED</span>
+                <Badge variant="emerald" className="font-mono text-[10px] tracking-wider uppercase">
+                  VERIFIED
+                </Badge>
               </div>
 
               <div className="mt-6 space-y-5">
@@ -57,7 +67,7 @@ export function About() {
 
                 <div className="flex items-start gap-3">
                   <div className="p-2 rounded-lg bg-[var(--color-beige-500)] dark:bg-white/5 text-[var(--color-black-400)] shrink-0 mt-0.5">
-                    <MapPin className="w-4 h-4 text-[var(--color-accent-blue)]" />
+                    <MapPin className="w-4 h-4 text-[var(--color-accent-blue)]" aria-hidden="true" />
                   </div>
                   <div>
                     <span className="text-[11px] font-mono uppercase tracking-wider text-[var(--color-text-muted)] block">
@@ -71,7 +81,7 @@ export function About() {
 
                 <div className="flex items-start gap-3">
                   <div className="p-2 rounded-lg bg-[var(--color-beige-500)] dark:bg-white/5 text-[var(--color-black-400)] shrink-0 mt-0.5">
-                    <GraduationCap className="w-4 h-4 text-[var(--color-accent-blue)]" />
+                    <GraduationCap className="w-4 h-4 text-[var(--color-accent-blue)]" aria-hidden="true" />
                   </div>
                   <div>
                     <span className="text-[11px] font-mono uppercase tracking-wider text-[var(--color-text-muted)] block">
@@ -85,7 +95,7 @@ export function About() {
 
                 <div className="flex items-start gap-3">
                   <div className="p-2 rounded-lg bg-[var(--color-beige-500)] dark:bg-white/5 text-[var(--color-black-400)] shrink-0 mt-0.5">
-                    <ShieldCheck className="w-4 h-4 text-[var(--color-accent-blue)]" />
+                    <ShieldCheck className="w-4 h-4 text-[var(--color-accent-blue)]" aria-hidden="true" />
                   </div>
                   <div>
                     <span className="text-[11px] font-mono uppercase tracking-wider text-[var(--color-text-muted)] block">
@@ -98,25 +108,34 @@ export function About() {
                 </div>
               </div>
 
-              {/* Telemetry Progress Bar (David Heckhoff's ProgressCount element) */}
+              {/* Telemetry Progress Bar with Accessible ARIA */}
               <div className="mt-8 pt-6 border-t border-[var(--color-border-subtle)]">
                 <div className="flex items-center justify-between text-xs font-mono mb-2">
                   <span className="text-[var(--color-text-300)] uppercase font-semibold">Reliability Target</span>
                   <span className="font-bold text-[var(--color-black-400)]">99.99%</span>
                 </div>
-                <div className="w-full h-2 rounded-full bg-[var(--color-beige-500)] dark:bg-white/10 overflow-hidden">
+                <div
+                  role="progressbar"
+                  aria-valuenow={99.99}
+                  aria-valuemin={0}
+                  aria-valuemax={100}
+                  aria-label="System Reliability Target: 99.99%"
+                  className="w-full h-2 rounded-full bg-[var(--color-beige-500)] dark:bg-white/10 overflow-hidden"
+                >
                   <div className="h-full bg-[var(--color-accent-blue)] rounded-full w-[99.9%]" />
                 </div>
               </div>
-            </div>
+            </Card>
           </div>
 
           {/* Right Column: Services & Competencies Box (7 Cols) */}
           <div className="md:col-span-7 flex flex-col gap-6">
-            <div className="p-6 sm:p-8 rounded-3xl bg-[var(--color-beige-400)] dark:bg-[#1c1d22] border border-[var(--color-border-subtle)] shadow-sm">
+            <Card className="p-6 sm:p-8 rounded-3xl bg-[var(--color-beige-400)] dark:bg-[#231f1d] border-[var(--color-border-subtle)] shadow-sm">
               <div className="flex items-center justify-between pb-4 border-b border-[var(--color-border-subtle)] font-mono text-xs text-[var(--color-text-300)] font-bold uppercase tracking-wider">
                 <span>CORE COMPETENCIES // SERVICES</span>
-                <span className="text-[var(--color-accent-blue)]">05 DOMAINS</span>
+                <Badge variant="amber" className="font-mono text-[10px] tracking-wider uppercase">
+                  05 DOMAINS
+                </Badge>
               </div>
 
               <div className="mt-6 space-y-4">
@@ -133,19 +152,19 @@ export function About() {
                         {service.name}
                       </span>
                     </div>
-                    <CheckCircle2 className="w-4 h-4 text-[var(--color-accent-blue)] shrink-0" />
+                    <CheckCircle2 className="w-4 h-4 text-[var(--color-accent-blue)] shrink-0" aria-hidden="true" />
                   </div>
                 ))}
               </div>
 
               {/* Bottom Quote / Philosophy sticker */}
               <div className="mt-6 p-4 rounded-2xl bg-[var(--color-black-400)] text-[var(--color-beige-400)] flex items-start gap-3">
-                <Terminal className="w-4 h-4 text-[var(--color-accent-blue)] shrink-0 mt-0.5" />
-                <p className="font-mono text-xs leading-relaxed">
+                <Terminal className="w-4 h-4 text-[var(--color-accent-blue)] shrink-0 mt-0.5" aria-hidden="true" />
+                <p className="font-mono text-xs leading-relaxed text-[var(--color-beige-400)]">
                   &gt; "Code is a liability; clear architectural boundaries and deterministic testing are true leverage."
                 </p>
               </div>
-            </div>
+            </Card>
           </div>
         </div>
       </div>

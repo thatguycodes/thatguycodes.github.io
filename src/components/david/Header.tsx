@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { personalInfo } from '@/data/portfolio';
+import { Button, buttonVariants } from 'sahara-ui/web';
 import { ArrowUpRight, Sun, Moon, Menu, X } from 'lucide-react';
 
 export function Header() {
@@ -11,12 +12,19 @@ export function Header() {
 
   useEffect(() => {
     // Check initial system or stored theme
-    const isDarkStored = localStorage.getItem('theme') === 'dark';
-    if (isDarkStored) {
+    const storedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const shouldBeDark = storedTheme === 'dark' || (!storedTheme && prefersDark);
+
+    if (shouldBeDark) {
       document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+      document.documentElement.setAttribute('data-theme', 'dark');
       setIsDark(true);
     } else {
       document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
+      document.documentElement.setAttribute('data-theme', 'light');
       setIsDark(false);
     }
 
@@ -33,9 +41,13 @@ export function Header() {
     setIsDark(nextDark);
     if (nextDark) {
       document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+      document.documentElement.setAttribute('data-theme', 'dark');
       localStorage.setItem('theme', 'dark');
     } else {
       document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
+      document.documentElement.setAttribute('data-theme', 'light');
       localStorage.setItem('theme', 'light');
     }
   };
@@ -44,7 +56,7 @@ export function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-[var(--color-beige-400)]/85 dark:bg-[#151619]/85 backdrop-blur-md border-b border-[var(--color-border-subtle)] py-3'
+          ? 'bg-[var(--color-beige-400)]/85 dark:bg-[#161311]/85 backdrop-blur-md border-b border-[var(--color-border-subtle)] py-3'
           : 'bg-transparent py-5'
       }`}
     >
@@ -52,10 +64,11 @@ export function Header() {
         {/* Logo / Brand */}
         <a
           href="#"
-          className="group flex items-center gap-2.5 font-bold tracking-tight text-[var(--color-black-400)]"
+          aria-label={`${personalInfo.shortName} home`}
+          className="group flex items-center gap-2.5 font-bold tracking-tight text-[var(--color-black-400)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-blue)] rounded-lg"
         >
-          {/* David Heckhoff-style geometric wireframe logo */}
-          <div className="w-8 h-8 rounded-lg bg-[var(--color-black-400)] flex items-center justify-center text-[var(--color-beige-400)] transition-transform duration-300 group-hover:rotate-12">
+          {/* Geometric wireframe logo */}
+          <div className="w-8 h-8 rounded-lg bg-[var(--color-black-400)] flex items-center justify-center text-[var(--color-beige-400)] transition-transform duration-300 group-hover:rotate-12 shadow-sm">
             <svg
               viewBox="0 0 24 24"
               fill="none"
@@ -64,6 +77,7 @@ export function Header() {
               strokeLinecap="round"
               strokeLinejoin="round"
               className="w-4 h-4"
+              aria-hidden="true"
             >
               <polygon points="12 2 2 7 12 12 22 7 12 2" />
               <polyline points="2 17 12 22 22 17" />
@@ -81,28 +95,28 @@ export function Header() {
         </a>
 
         {/* Center Navigation Links */}
-        <nav className="hidden md:flex items-center gap-8 text-sm font-semibold text-[var(--color-text-300)]">
+        <nav aria-label="Main navigation" className="hidden md:flex items-center gap-8 text-sm font-semibold text-[var(--color-text-300)]">
           <a
             href="#about"
-            className="hover:text-[var(--color-black-400)] transition-colors"
+            className="hover:text-[var(--color-black-400)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-blue)] rounded-sm"
           >
             About
           </a>
           <a
             href="#projects"
-            className="hover:text-[var(--color-black-400)] transition-colors"
+            className="hover:text-[var(--color-black-400)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-blue)] rounded-sm"
           >
             Projects
           </a>
           <a
             href="#experience"
-            className="hover:text-[var(--color-black-400)] transition-colors"
+            className="hover:text-[var(--color-black-400)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-blue)] rounded-sm"
           >
             Experience
           </a>
           <a
             href="#contact"
-            className="hover:text-[var(--color-black-400)] transition-colors"
+            className="hover:text-[var(--color-black-400)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-blue)] rounded-sm"
           >
             Contact
           </a>
@@ -110,84 +124,101 @@ export function Header() {
 
         {/* Right Actions: Theme Toggle & Get in touch */}
         <div className="hidden sm:flex items-center gap-3">
-          <button
+          <Button
             type="button"
+            variant="outline"
+            size="icon"
             onClick={toggleTheme}
-            aria-label="Toggle theme"
-            className="w-10 h-10 rounded-full border border-[var(--color-border-subtle)] flex items-center justify-center text-[var(--color-black-400)] hover:bg-[var(--color-beige-500)] dark:hover:bg-white/10 transition-colors"
+            aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
+            className="w-10 h-10 rounded-full border border-[var(--color-border-subtle)] text-[var(--color-black-400)] hover:bg-[var(--color-beige-500)] dark:hover:bg-white/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-blue)]"
           >
-            {isDark ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-stone-700" />}
-          </button>
+            {isDark ? <Sun className="w-4 h-4 text-amber-400" aria-hidden="true" /> : <Moon className="w-4 h-4 text-stone-700" aria-hidden="true" />}
+          </Button>
 
           <a
-            href={`mailto:${personalInfo.email}`}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[var(--color-black-400)] text-[var(--color-beige-400)] text-xs sm:text-sm font-bold tracking-tight hover:opacity-90 transition-all shadow-sm group"
+            href="#contact"
+            className={buttonVariants({
+              variant: 'default',
+              className: 'rounded-full bg-[var(--color-black-400)] text-[var(--color-beige-400)] text-xs sm:text-sm font-bold tracking-tight hover:opacity-90 shadow-sm inline-flex items-center gap-1.5 px-4 py-2 h-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-blue)]',
+            })}
           >
             <span>Get in touch</span>
-            <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
           </a>
         </div>
 
         {/* Mobile Menu Button */}
         <div className="flex sm:hidden items-center gap-2">
-          <button
+          <Button
             type="button"
+            variant="outline"
+            size="icon"
             onClick={toggleTheme}
-            aria-label="Toggle theme"
-            className="w-9 h-9 rounded-full border border-[var(--color-border-subtle)] flex items-center justify-center text-[var(--color-black-400)]"
+            aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
+            className="w-9 h-9 rounded-full border border-[var(--color-border-subtle)] text-[var(--color-black-400)]"
           >
-            {isDark ? <Sun className="w-3.5 h-3.5 text-amber-400" /> : <Moon className="w-3.5 h-3.5" />}
-          </button>
-          <button
+            {isDark ? <Sun className="w-3.5 h-3.5 text-amber-400" aria-hidden="true" /> : <Moon className="w-3.5 h-3.5" aria-hidden="true" />}
+          </Button>
+          <Button
             type="button"
+            variant="outline"
+            size="icon"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle navigation"
-            className="w-9 h-9 rounded-full border border-[var(--color-border-subtle)] flex items-center justify-center text-[var(--color-black-400)]"
+            aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={mobileMenuOpen}
+            className="w-9 h-9 rounded-full border border-[var(--color-border-subtle)] text-[var(--color-black-400)]"
           >
-            {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
-          </button>
+            {mobileMenuOpen ? <X className="w-4 h-4" aria-hidden="true" /> : <Menu className="w-4 h-4" aria-hidden="true" />}
+          </Button>
         </div>
       </div>
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="sm:hidden px-6 pt-4 pb-6 bg-[var(--color-beige-400)] dark:bg-[#18191d] border-b border-[var(--color-border-subtle)] shadow-xl flex flex-col gap-4">
+        <nav
+          aria-label="Mobile navigation"
+          className="sm:hidden border-b border-[var(--color-border-subtle)] bg-[var(--color-beige-400)] dark:bg-[#161311] px-4 pt-3 pb-6 flex flex-col gap-4 font-semibold text-sm"
+        >
           <a
             href="#about"
             onClick={() => setMobileMenuOpen(false)}
-            className="text-base font-semibold text-[var(--color-black-400)]"
+            className="py-1 text-[var(--color-text-300)] hover:text-[var(--color-black-400)]"
           >
             About
           </a>
           <a
             href="#projects"
             onClick={() => setMobileMenuOpen(false)}
-            className="text-base font-semibold text-[var(--color-black-400)]"
+            className="py-1 text-[var(--color-text-300)] hover:text-[var(--color-black-400)]"
           >
             Projects
           </a>
           <a
             href="#experience"
             onClick={() => setMobileMenuOpen(false)}
-            className="text-base font-semibold text-[var(--color-black-400)]"
+            className="py-1 text-[var(--color-text-300)] hover:text-[var(--color-black-400)]"
           >
             Experience
           </a>
           <a
             href="#contact"
             onClick={() => setMobileMenuOpen(false)}
-            className="text-base font-semibold text-[var(--color-black-400)]"
+            className="py-1 text-[var(--color-text-300)] hover:text-[var(--color-black-400)]"
           >
             Contact
           </a>
           <a
-            href={`mailto:${personalInfo.email}`}
+            href="#contact"
             onClick={() => setMobileMenuOpen(false)}
-            className="w-full text-center py-2.5 rounded-full bg-[var(--color-black-400)] text-[var(--color-beige-400)] text-sm font-bold mt-2"
+            className={buttonVariants({
+              variant: 'default',
+              className: 'w-full mt-2 rounded-full bg-[var(--color-black-400)] text-[var(--color-beige-400)] inline-flex items-center justify-center gap-1.5',
+            })}
           >
-            Get in touch
+            <span>Get in touch</span>
+            <ArrowUpRight className="w-3.5 h-3.5 ml-1" aria-hidden="true" />
           </a>
-        </div>
+        </nav>
       )}
     </header>
   );
