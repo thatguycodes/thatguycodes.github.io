@@ -78,19 +78,42 @@ export function Projects() {
                   </span>
                 </div>
 
-                {/* Top-Right Notch & Action Button */}
-                <div className="absolute top-0 right-0 z-20 flex items-start">
-                  <Notch flipX className="text-[var(--color-beige-500)] dark:text-[#231f1d]" />
-                  <div className="bg-[var(--color-beige-500)] dark:bg-[#231f1d] p-2 rounded-bl-2xl">
-                    <Button
-                      variant="default"
-                      size="icon"
-                      aria-label={`View case study: ${project.title}`}
-                      className="w-10 h-10 rounded-full bg-[var(--color-black-400)] text-[var(--color-beige-400)] flex items-center justify-center transition-transform duration-300 group-hover:rotate-45 group-hover:bg-[var(--color-accent-blue)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-blue)]"
+                {/* High-Contrast Action Button with Seamless Inverted Corner Scoops */}
+                <div className="absolute top-0 right-0 z-20 flex flex-col items-end">
+                  <div className="flex items-start">
+                    {/* Left Concave Scoop Notch */}
+                    <svg
+                      viewBox="0 0 20 20"
+                      className="w-5 h-5 text-[var(--color-beige-500)] fill-current shrink-0 pointer-events-none"
+                      aria-hidden="true"
                     >
-                      <ArrowUpRight className="w-4 h-4 text-white" aria-hidden="true" />
-                    </Button>
+                      <path d="M0 0 H20 V20 C20 8.954 11.046 0 0 0 Z" />
+                    </svg>
+
+                    {/* Corner Button Housing */}
+                    <div className="bg-[var(--color-beige-500)] p-2 rounded-bl-2xl">
+                      <Button
+                        variant="default"
+                        size="icon"
+                        aria-label={`View case study: ${project.title}`}
+                        className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[var(--color-black-400)] flex items-center justify-center transition-all duration-300 group-hover:rotate-45 group-hover:bg-[var(--color-accent-blue)] shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-blue)] cursor-pointer"
+                      >
+                        <ArrowUpRight
+                          className="w-5 h-5 stroke-[2.5] text-[var(--color-beige-400)] group-hover:text-white transition-colors"
+                          aria-hidden="true"
+                        />
+                      </Button>
+                    </div>
                   </div>
+
+                  {/* Bottom Concave Scoop Notch */}
+                  <svg
+                    viewBox="0 0 20 20"
+                    className="w-5 h-5 text-[var(--color-beige-500)] fill-current shrink-0 -mt-0.5 pointer-events-none"
+                    aria-hidden="true"
+                  >
+                    <path d="M20 20 V0 H0 C8.954 0 20 8.954 20 20 Z" />
+                  </svg>
                 </div>
 
                 {/* Top-Left Category Badge */}
