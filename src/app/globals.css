@@ -1,66 +1,38 @@
 @import "sahara-ui/styles.css";
 
 /* ========================================================================= */
-/* Complete Theme Variables: Sahara Solstice (Light) & Nocturne (Dark)       */
+/* Portfolio Theme Aliases mapped cleanly to Sahara UI Design System Tokens  */
 /* ========================================================================= */
 
-:root,
-.light,
-[data-theme="light"] {
+:root {
   /* Surfaces & Backgrounds */
-  --color-beige-400: #fff8f5;
-  --color-beige-500: #faf2ee;
-  --color-beige-600: #f3e7e0;
-  --color-beige-700: #efe3db;
+  --color-beige-400: var(--background);
+  --color-beige-500: var(--card);
+  --color-beige-600: var(--muted, #f3e7e0);
+  --color-beige-700: var(--accent, #efe3db);
 
-  /* Typography (High-contrast WCAG AAA compliant on light background) */
-  --color-black-400: #221b17;
-  --color-black-500: #110d0c;
-  --color-text-400: #221b17;
-  --color-text-300: #514536;
-  --color-text-muted: #705f55;
+  /* Typography */
+  --color-black-400: var(--foreground);
+  --color-black-500: var(--foreground);
+  --color-text-400: var(--foreground);
+  --color-text-300: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
 
-  /* Borders & Dividers */
-  --color-border-subtle: rgba(34, 27, 23, 0.12);
-  --color-border-base: rgba(34, 27, 23, 0.22);
+  /* Borders & Accents */
+  --color-border-subtle: var(--border);
+  --color-border-base: var(--border);
+  --color-accent-blue: var(--accent-primary);
+  --color-accent-amber: var(--accent-primary);
+  --color-accent-cyan: var(--accent-primary);
 
-  /* Accents & Signals */
-  --color-accent-blue: #c86d3b;
-  --color-accent-amber: #e09f3e;
-  --color-accent-cyan: #0284c7;
-
+  /* Fonts */
   --font-urbanist: 'Urbanist', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
 
-.dark,
-[data-theme="dark"] {
-  /* Surfaces & Backgrounds (Sahara Nocturne Obsidian Basalt) */
-  --color-beige-400: #161311;
-  --color-beige-500: #231f1d;
-  --color-beige-600: #2e2927;
-  --color-beige-700: #393431;
-
-  /* Typography (High-contrast WCAG AAA compliant on dark background) */
-  --color-black-400: #f5efe6;
-  --color-black-500: #ffffff;
-  --color-text-400: #f5efe6;
-  --color-text-300: #d5c4b1;
-  --color-text-muted: #a8a29e;
-
-  /* Borders & Dividers */
-  --color-border-subtle: rgba(255, 255, 255, 0.12);
-  --color-border-base: rgba(255, 255, 255, 0.2);
-
-  /* Accents & Signals (Glowing Sahara Amber & Cyan) */
-  --color-accent-blue: #ffba56;
-  --color-accent-amber: #ffba56;
-  --color-accent-cyan: #38bdf8;
-}
-
 body {
-  background-color: var(--color-beige-400);
-  color: var(--color-text-400);
+  background-color: var(--background);
+  color: var(--foreground);
   font-family: var(--font-urbanist);
   min-height: 100vh;
   margin: 0;
@@ -69,13 +41,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Accessible focus outlines for keyboard navigation */
-:focus-visible {
-  outline: 2px solid var(--color-accent-blue);
-  outline-offset: 2px;
-}
-
-/* Subtle Technical Grid Overlay */
+/* Portfolio Technical Grid Overlay */
 .bg-david-grid {
   background-size: 32px 32px;
   background-image: 
@@ -90,26 +56,8 @@ body {
     linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
 }
 
-/* Custom smooth text selection */
+/* Text Selection Accent */
 ::selection {
-  background-color: var(--color-accent-blue);
+  background-color: var(--accent-primary);
   color: #161311;
-}
-
-.dark ::selection,
-[data-theme="dark"] ::selection {
-  background-color: var(--color-accent-blue);
-  color: #161311;
-}
-
-/* Respect user preferences for reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  ::before,
-  ::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
 }
